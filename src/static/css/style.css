@@ -1,0 +1,229 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #121212;
+    color: #e5e5e7;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    font-weight: 600;
+    padding: 20px 0;
+    color: #ffffff;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 24px;
+    padding: 24px;
+}
+
+.widget {
+    background: #1e1e1f;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.widget h2 {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.widget h3 {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #b5b5b7;
+}
+
+.widget-content {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 320px;
+    padding-right: 8px;
+    scrollbar-width: none;
+}
+
+.widget-content::-webkit-scrollbar {
+    display: none;
+}
+
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.widget-icon {
+    width: 22px;
+    height: 22px;
+    filter: invert(100%);
+    transition: opacity 0.2s;
+}
+
+#github-widget {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 380px;
+    height: 250px;
+}
+
+
+select {
+    background: #2b2b2d;
+    color: #f5f5f7;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 10px;
+    margin-bottom: 14px;
+    font-size: 14px;
+}
+
+.commit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.commit-item {
+    padding: 10px;
+    border-radius: 10px;
+    background: #2a2a2c;
+    transition: background 0.2s;
+}
+
+.commit-item:hover {
+    background: #333335;
+}
+
+.commit-message {
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.commit-author {
+    font-size: 12px;
+    color: #a0a0a0;
+    margin-top: 2px;
+}
+
+.list a {
+    display: block;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: #2a2a2c;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #0a84ff;
+    transition: background 0.2s;
+}
+.list a:hover {
+    background: #333335;
+}
+
+/* === SPOTIFY WIDGET === */
+#spotify-widget {
+    background: #1e1e1f;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    max-width: 360px;
+    margin: 0 auto;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 350px;
+    height: 340px;
+}
+
+#spotify-widget .cover {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+#spotify-widget .cover img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    margin-top: 10px;
+
+}
+
+#spotify-widget .track-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 4px;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+#spotify-widget .artist-name {
+    font-size: 14px;
+    color: #b5b5b7;
+    margin-bottom: 12px;
+    margin-left: 50px;
+}
+
+#spotify-widget .controls {
+    margin-top: 14px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+#spotify-widget .controls button {
+    background: #2a2a2c;
+    border: none;
+    color: #ffffff;
+    font-size: 18px;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    margin-top: 20px;
+}
+
+#spotify-widget .controls button:hover {
+    background: #1db954; /* Spotify green */
+    transform: scale(1.08);
+}
+
+#spotify-login {
+    display: none;
+    text-align: center;
+}
+
+#spotify-login button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    background: #1db954;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.1s;
+}
+
+#spotify-login button:hover {
+    background: #1ed760;
+    transform: scale(1.05);
+}
+
