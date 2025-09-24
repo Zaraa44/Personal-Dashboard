@@ -55,10 +55,27 @@
   </div>
 </div>
 
+<div id="google-widget" class="widget">
+  <div id="google-login" style="text-align:center;">
+    <a href="/api/google/login">
+      <button>Log in met Google</button>
+    </a>
+  </div>
+  <div id="google-content" style="display:none;">
+    <div class="widget-header">
+      <h2>Google Agenda</h2>
+      <img src="{{ url_for('static', filename='img/google.svg') }}" class="widget-icon">
+    </div>
+    <div class="widget-content">
+      <div id="google-events"></div>
+    </div>
+  </div>
+</div>
 
 
 
   <script src="{{ url_for('static', filename='js/github.js') }}"></script>
   <script src="{{ url_for('static', filename='js/spotify.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/google.js') }}"></script>
 </body>
 </html>

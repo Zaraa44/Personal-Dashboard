@@ -4,6 +4,8 @@ from controllers.github_controller import github_bp
 import os
 from dotenv import load_dotenv
 
+from src.controllers.google_controller import google_bp
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -12,6 +14,7 @@ app.secret_key = os.getenv("SECRET_KEY", "devsecret")
 # Register blueprints
 app.register_blueprint(spotify_bp, url_prefix="/api/spotify")
 app.register_blueprint(github_bp, url_prefix="/api/github")
+app.register_blueprint(google_bp, url_prefix="/api/google")
 
 @app.route("/")
 def index():
