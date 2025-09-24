@@ -5,6 +5,7 @@
   <title>Dashboard</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/grid.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
@@ -117,6 +118,27 @@
   </div>
 </div>
 
+<!-- 7: Favoriete websites -->
+<!-- 7: Favoriete websites -->
+<div class="div7 widget" id="links-widget">
+  <div class="widget-header">
+    <h2>Favorieten</h2>
+  </div>
+  <div id="website-links" class="links-row">
+   <a href="https://github.com" target="_blank" class="icon-link">
+  <i class="fab fa-github"></i>
+</a>
+<a href="https://google.com" target="_blank" class="icon-link">
+  <i class="fab fa-google"></i>
+</a>
+<a href="https://youtube.com" target="_blank" class="icon-link">
+  <i class="fab fa-youtube"></i>
+</a>
+  </div>
+</div>
+
+
+
 </div>
 
 
@@ -126,6 +148,8 @@
   <script src="{{ url_for('static', filename='js/system.js') }}"></script>
   <script src="{{ url_for('static', filename='js/fullscreen.js') }}"></script>
 <script src="{{ url_for('static', filename='js/pomodoro.js') }}"></script>
+<script src="{{ url_for('static', filename='js/links.js') }}"></script>
+
 
 
 </body>

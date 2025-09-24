@@ -310,6 +310,7 @@ select {
 #system-widget {
     width: 470px;
     height: 315px;
+    margin-top: 20px;
 }
 
 .stat {
@@ -464,3 +465,71 @@ body.fullscreen-mode #pomodoro-widget {
   background: #ea7e6d;
   transform: scale(1.05);
 }
+
+/* === FAVORIETE LINKS WIDGET (met 5 vierkante images) === */
+.links-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.link-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.link-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.link-img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+}
+
+.link-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  padding: 4px 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.link-img:hover .link-overlay {
+  opacity: 1;
+}
+
+.icon-link {
+  font-size: 42px;
+  color: white;      /* basis kleur */
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  background: #2a2a2c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s, color 0.3s;
+}
+.icon-link:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+  color: #ea7e6d;    /* hover kleur */
+}
+

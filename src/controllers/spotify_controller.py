@@ -127,7 +127,7 @@ def format_track_data(playback_data, playlist_name):
 
 @spotify_bp.route("/current")
 def current_track():
-    if "access_token" not in session:
+    if "spotify_token" not in session:
         return jsonify({"error": "Not authenticated"}), 401
 
     headers = get_auth_headers()
@@ -142,7 +142,26 @@ def current_track():
         return jsonify(response)
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        # check of token verlopen is → vernieuwen
+        if "401" in str(e):
+            new_token = refresh_spotify_token()
+            if new_token:
+                headers = get_auth_headers()
+                try:
+                    playback_data = get_current_playback(headers)
+                    if not playback_data:
+                        return jsonify({"playing": False})
+                    playlist_name = get_playlist_name(playback_data.get("context"), headers)
+                    response = format_track_data(playback_data, playlist_name)
+                    return jsonify(response)
+                except Exception as inner_e:
+                    return jsonify({"error": str(inner_e)}), 400
+
+        # geen actief device
+        if "404" in str(e) or "403" in str(e):
+            return jsonify({"error": "Geen actief Spotify device gevonden"}), 404
+
+        return jsonify({"error": str(e)}), 400
 
 
 @spotify_bp.route("/play", methods=["PUT"])
