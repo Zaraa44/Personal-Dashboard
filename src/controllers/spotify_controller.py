@@ -42,16 +42,38 @@ def callback():
         'client_secret': CLIENT_SECRET
     })
     response_data = response.json()
-    print("TOKEN RESPONSE:", response_data)  # <== voeg dit toe
-    session['access_token'] = response_data['access_token']
+
+    session['spotify_token'] = response_data['access_token']
+    session['spotify_refresh_token'] = response_data.get('refresh_token')  # opslaan!
+
     return redirect("/")
 
 
 
-# === Helper functies ===
+def refresh_spotify_token():
+    refresh_token = session.get('spotify_refresh_token')
+    if not refresh_token:
+        return None
+
+    response = requests.post(SPOTIFY_TOKEN_URL, data={
+        'grant_type': 'refresh_token',
+        'refresh_token': refresh_token,
+        'client_id': CLIENT_ID,
+        'client_secret': CLIENT_SECRET
+    })
+    data = response.json()
+    new_token = data.get('access_token')
+
+    if new_token:
+        session['spotify_token'] = new_token
+    return new_token
+
 
 def get_auth_headers():
-    return {"Authorization": f"Bearer {session['access_token']}"}
+    token = session.get('spotify_token')
+    if not token:
+        return None
+    return {"Authorization": f"Bearer {token}"}
 
 
 def get_current_playback(headers):

@@ -27,7 +27,7 @@ async function loadRepoData(repo) {
   const issues = await (await fetch(`/api/github/${repo}/issues`)).json();
 
   document.getElementById("repo-info").innerHTML =
-    `<p><b>${info.name}</b><br>${info.description || "No description"}</p>`;
+    `<p><br>${info.description || "No description"}</p>`;
 
   document.getElementById("repo-commits").innerHTML =
     commits.map(c => `

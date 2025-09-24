@@ -1,4 +1,4 @@
-async function fetchEvents() {
+async function fetchEvents(limit = 8) {
   const res = await fetch("/api/google/events");
   if (!res.ok) {
     document.getElementById("google-content").style.display = "none";
@@ -10,13 +10,22 @@ async function fetchEvents() {
   document.getElementById("google-login").style.display = "none";
   document.getElementById("google-content").style.display = "block";
 
-  const events = data.items || [];
-  document.getElementById("google-events").innerHTML = events.map(e => `
-    <div>
-      <b>${e.summary || "Geen titel"}</b><br>
-      ${e.start?.dateTime || e.start?.date || "Onbekend tijdstip"}
-    </div>
-  `).join("<hr>");
+  // Eerstvolgende `limit` events
+  const events = (data.items || []).slice(0, limit);
+
+  document.getElementById("google-events").innerHTML = events.map(e => {
+    const date = e.start?.dateTime || e.start?.date || "Onbekend";
+    const title = e.summary || "Geen titel";
+
+    return `
+      <div class="event-card">
+        <div class="event-date">${new Date(date).toLocaleDateString("nl-NL", { weekday: "short", day: "numeric", month: "short" })}</div>
+        <div class="event-title">${title}</div>
+        <div class="event-time">${new Date(date).toLocaleTimeString("nl-NL", { hour: "2-digit", minute: "2-digit" })}</div>
+      </div>
+    `;
+  }).join("");
 }
 
-fetchEvents();
+// standaard: 8 events
+fetchEvents(8);
