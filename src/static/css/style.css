@@ -1,3 +1,12 @@
+:root {
+  --primary: #ea7e6d;
+  --primary-light: #f3a683;
+  --cpu-gradient: linear-gradient(90deg, #8a4242, #ff7676);
+  --ram-gradient: linear-gradient(90deg, #9b5449, #ff9a76);
+  --disk-gradient: linear-gradient(90deg, #a96851, #ffbf76);
+}
+
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: #121212;
@@ -34,9 +43,14 @@ h1 {
 .div4 { grid-column: 3; grid-row: 2 / span 2; } /* Pomodoro */
 .div5 { grid-column: 4 / span 2; grid-row: 1 / span 3; } /* Spotify */
 .div6 { grid-column: 3; grid-row: 4 / span 2; }
-.div7 { grid-column: 4 / span 2; grid-row: 4; }
-.div8 { grid-column: 4; grid-row: 5; }
-.div9 { grid-column: 5; grid-row: 5; }
+.div7 {
+  grid-column: 4 / span 2;
+  grid-row: 4 / span 2; /* ipv alleen row 4 */
+}
+
+.div8 { grid-column: 4; grid-row: 6; }
+.div9 { grid-column: 5; grid-row: 6; }
+
 
 /* Zorg dat widgets niet uitrekken */
 .widget {
@@ -160,7 +174,7 @@ select {
 }
 .commit-author {
   font-size: 12px;
-  color: #ea7e6d;
+  color: var(--primary);
   margin-top: 2px;
 }
 
@@ -171,7 +185,7 @@ select {
   background: #2a2a2c;
   margin-bottom: 6px;
   font-size: 14px;
-  color: #ea7e6d;
+  color: var(--primary);
   transition: background 0.2s;
 }
 .list a:hover { background: #333335; }
@@ -221,7 +235,7 @@ select {
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 #spotify-widget .controls button:hover {
-  background: #ea7e6d;
+  background: var(--primary);
   transform: scale(1.08);
 }
 #spotify-login { text-align: center; }
@@ -229,14 +243,14 @@ select {
   padding: 8px 14px;
   border: none;
   border-radius: 8px;
-  background: #ea7e6d;
+  background: var(--primary);
   color: white;
   cursor: pointer;
   font-weight: 600;
   transition: background 0.2s, transform 0.1s;
 }
 #spotify-login button:hover {
-  background: #ea7e6d;
+  background: var(--primary);
   transform: scale(1.05);
 }
 
@@ -264,7 +278,7 @@ select {
 #google-widget .event-date {
   font-size: 12px;
   font-weight: 600;
-  color: #ea7e6d;
+  color: var(--primary);
   margin-bottom: 6px;
 }
 #google-widget .event-title {
@@ -284,7 +298,7 @@ select {
   font-size: 60px;
   font-weight: 700;
   margin: 20px 0;
-  color: #ea7e6d;
+  color: var(--primary);
 }
 .pomodoro-controls {
   display: flex;
@@ -305,7 +319,7 @@ select {
   margin-left: 10px;
 }
 .pomodoro-controls button:hover {
-  background: #ea7e6d;
+   background: var(--primary);
   transform: scale(1.05);
 }
 
@@ -334,15 +348,15 @@ select {
 }
 
 #cpu-bar {
-  background: linear-gradient(90deg, #8a4242, #ff7676); /* rood/oranje */
+    background: var(--cpu-gradient);
 }
 
 #ram-bar {
-  background: linear-gradient(90deg, #9b5449, #ff9a76); /* blauw */
+    background: var(--ram-gradient);
 }
 
 #disk-bar {
-  background: linear-gradient(90deg, #a96851, #ffbf76); /* groen/turquoise */
+  background: var(--disk-gradient);
 }
 
 #system-widget .stat {
@@ -364,7 +378,7 @@ select {
 
 /* Gradient icon kleur */
 #links-widget .icon-link i {
-  background: linear-gradient(90deg, #ea7e6d, #f3a683); /* donker links → licht rechts */
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -419,4 +433,169 @@ select {
 .icon-link:hover {
   transform: scale(1.15);
   box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+}
+
+
+
+#datetime-widget .datetime-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 16px;
+    max-height: 10%;
+}
+
+#datetime-widget .date {
+  font-size: 18px;
+  color: #ffffff;
+}
+
+#datetime-widget .time {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--primary);
+    margin-top: 0.9rem;
+}
+
+
+#datetime-widget {
+  height: auto;
+  margin-bottom: 2rem;
+margin-top: 9.5rem;
+}
+
+/* Modal basis */
+.modal {
+  display: none; /* verborgen standaard */
+  position: fixed;
+  z-index: 2000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #1e1e1f;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  width: 320px;
+  text-align: center;
+}
+
+.modal-content h3 {
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.close {
+  position: absolute;
+  top: 16px; right: 24px;
+  font-size: 22px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #fff;
+}
+/* Buttons naast elkaar */
+#settings-widget .links-row {
+  display: flex;
+  gap: 16px;
+  justify-content: space-around;
+  margin-top: 12px;
+}
+
+/* Achtergrond donker vierkantje */
+#settings-widget .icon-link {
+  font-size: 28px;
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  background: #2a2a2c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  position: relative;
+  border: none;
+  cursor: pointer;
+}
+
+/* Tooltip boven knop */
+#settings-widget .icon-link::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 100%;
+  margin-bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2a2a2c;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: opacity 0.2s, transform 0.2s;
+}
+#settings-widget .icon-link:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(4px);
+}
+
+/* Iconen standaard grijs */
+#settings-widget .icon-link i {
+  font-size: 28px;
+  color: #888;
+  transition: all 0.3s;
+}
+
+/* Hover: icoon krijgt gradient */
+#settings-widget .icon-link:hover i {
+   background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  filter: brightness(1.2);
+}
+
+/* Hover effect knop zelf */
+#settings-widget .icon-link:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+}
+
+
+#settings-widget{
+      height: auto;
+  margin-bottom: 2rem;
+margin-top: 9.5rem;
+}
+
+.theme-options {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.theme-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.theme-btn:hover {
+  transform: scale(1.15);
 }

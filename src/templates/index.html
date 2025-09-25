@@ -143,9 +143,62 @@
   </div>
 </div>
 
+<!-- Date/Time/Weather widget -->
+<div class="div8 widget" id="datetime-widget">
+  <div class="widget-content datetime-content">
+    <div class="date" id="current-date">--</div>
+    <div class="time" id="current-time">--:--</div>
+  </div>
+</div>
 
-  <div class="div8">8</div>
-  <div class="div9">9</div>
+<!-- Settings / GitHub widget -->
+<div class="div9 widget" id="settings-widget">
+  <div class="widget-header">
+    <h2>Instellingen</h2>
+    <i class="fa-solid fa-gear widget-icon"></i>
+  </div>
+  <div class="links-row">
+    <!-- GitHub link -->
+    <a href="https://github.com" target="_blank" class="icon-link" data-label="GitHub">
+      <i class="fa-brands fa-github"></i>
+    </a>
+
+    <!-- Settings modal trigger -->
+    <button id="open-settings" class="icon-link" data-label="Thema Instellingen">
+      <i class="fa-solid fa-palette"></i>
+    </button>
+
+    <!-- Extra knop: Info -->
+    <button id="open-info" class="icon-link" data-label="Informatie">
+      <i class="fa-solid fa-circle-info"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Settings Modal -->
+<div id="settings-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Kies een thema</h3>
+    <div class="theme-options">
+      <button class="theme-btn" data-theme="sunset" style="background: linear-gradient(90deg,#ea7e6d,#f3a683)"></button>
+      <button class="theme-btn" data-theme="ocean" style="background: linear-gradient(90deg,#3a7bd5,#00d2ff)"></button>
+      <button class="theme-btn" data-theme="forest" style="background: linear-gradient(90deg,#11998e,#38ef7d)"></button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Info Modal -->
+<div id="info-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-info">&times;</span>
+    <h3>Over dit dashboard</h3>
+    <p>Hier kan je extra info plaatsen, bijvoorbeeld versie of credits.</p>
+  </div>
+</div>
+
+
 </div>
 
 
@@ -154,7 +207,43 @@
   <script src="{{ url_for('static', filename='js/google.js') }}"></script>
   <script src="{{ url_for('static', filename='js/system.js') }}"></script>
   <script src="{{ url_for('static', filename='js/fullscreen.js') }}"></script>
-<script src="{{ url_for('static', filename='js/pomodoro.js') }}"></script>
-<script src="{{ url_for('static', filename='js/links.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/pomodoro.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/links.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/date.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
+<script>
+  // Settings modal
+  const modal = document.getElementById("settings-modal");
+  const openBtn = document.getElementById("open-settings");
+  const closeBtn = document.querySelector(".close");
+
+  openBtn.addEventListener("click", () => {
+    modal.style.display = "flex";
+  });
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // Info modal
+  const infoModal = document.getElementById("info-modal");
+  const openInfo = document.getElementById("open-info");
+  const closeInfo = document.querySelector(".close-info");
+
+  openInfo.addEventListener("click", () => {
+    infoModal.style.display = "flex";
+  });
+  closeInfo.addEventListener("click", () => {
+    infoModal.style.display = "none";
+  });
+
+  // Klik buiten sluit modal
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) modal.style.display = "none";
+    if (e.target === infoModal) infoModal.style.display = "none";
+  });
+</script>
+
+
 </body>
 </html>

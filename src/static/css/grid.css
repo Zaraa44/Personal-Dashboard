@@ -44,18 +44,19 @@
 
 .div7 {
   grid-column: 4 / span 2;
-  grid-row: 4;
+  grid-row: 4 / span 2; /* ipv alleen row 4 */
 }
 
 .div8 {
   grid-column: 4;
-  grid-row: 5;
-}
+  grid-row: 4 / span 3;  /* neemt 2 rijen in */
 
+}
 .div9 {
   grid-column: 5;
-  grid-row: 5;
+  grid-row: 4 / span 2;  /* ook netjes gelijk trekken */
 }
+
 
 /* Responsive: tablet */
 @media (max-width: 1024px) {
