@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/grid.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="parent">
+  <!-- 1: Google Calendar -->
+<div id="google-widget" class="widget">
+  <div class="widget-header">
+    <h2>Agenda</h2>
+    <img src="{{ url_for('static', filename='img/google-calendar.svg') }}" class="widget-icon">
+  </div>
+
+  <div id="google-login" style="display:none; text-align:center;">
+    <a href="/api/google/login"><button>Login met Google</button></a>
+  </div>
+
+  <div id="google-content" style="display:none;">
+    <div class="agenda-cards" id="google-events"></div>
+  </div>
+</div>
+
+
+  <!-- 2: GitHub -->
+  <div class="div2 widget" id="github-widget">
+    <div class="widget-header">
+      <h2>GitHub</h2>
+      <img src="{{ url_for('static', filename='img/github.svg') }}" class="widget-icon">
+    </div>
+    <select id="repo-select"></select>
+    <div class="widget-content">
+      <div id="repo-info"></div>
+      <h3>Commits</h3>
+      <div id="repo-commits" class="commit-list"></div>
+      <h3>Pull Requests</h3>
+      <div id="repo-pulls" class="list"></div>
+      <h3>Issues</h3>
+      <div id="repo-issues" class="list"></div>
+    </div>
+  </div>
+
+<!-- 3: Dashboard title -->
+<div class="div3">
+  <h1 id="dashboard-title" class="dashboard-button">
+    Dashboard <span id="fullscreen-icon">⛶</span>
+  </h1>
+</div>
+
+
+  <!-- 4: Spotify -->
+  <div class="div4 widget" id="spotify-widget">
+    <div id="spotify-login" style="display:none; text-align:center;">
+      <p>Niet ingelogd bij Spotify</p>
+      <a href="/api/spotify/login"><button>Log in met Spotify</button></a>
+    </div>
+    <div id="spotify-content" style="display:none;">
+      <div class="widget-header">
+        <h2>Spotify</h2>
+        <img src="{{ url_for('static', filename='img/spotify.svg') }}" class="widget-icon">
+      </div>
+      <div class="cover">
+        <img id="album-art" src="" alt="Album Cover">
+      </div>
+      <div class="track-title" id="track-name">Loading...</div>
+      <div class="artist-name" id="artist-name"></div>
+      <div class="controls">
+        <button id="prev-btn">⏮</button>
+        <button id="play-btn">▶</button>
+        <button id="next-btn">⏭</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5: System Info -->
+  <div class="div5 widget" id="system-widget">
+    <div class="widget-header">
+      <h2>Systeemstatus</h2>
+      <img src="{{ url_for('static', filename='img/cpu.svg') }}" class="widget-icon">
+    </div>
+    <div class="widget-content">
+      <div class="stat">
+        <div class="label">CPU</div>
+        <div class="progress"><div id="cpu-bar" class="progress-bar"></div></div>
+        <div id="cpu-usage" class="value">0%</div>
+      </div>
+      <div class="stat">
+        <div class="label">RAM</div>
+        <div class="progress"><div id="ram-bar" class="progress-bar"></div></div>
+        <div id="ram-usage" class="value">-</div>
+      </div>
+      <div class="stat">
+        <div class="label">Disk</div>
+        <div class="progress"><div id="disk-bar" class="progress-bar"></div></div>
+        <div id="disk-usage" class="value">-</div>
+      </div>
+    </div>
+  </div>
+
+<!-- 6: Pomodoro Timer -->
+<div class="div6 widget" id="pomodoro-widget">
+  <div class="widget-header">
+    <h2>Pomodoro</h2>
+    <img src="{{ url_for('static', filename='img/timer.svg') }}" class="widget-icon">
+  </div>
+  <div class="widget-content pomodoro-content">
+    <div id="pomodoro-time">25:00</div>
+    <div class="pomodoro-controls">
+      <button id="start-pomodoro">▶ Start</button>
+      <button id="pause-pomodoro">⏸ Pause</button>
+      <button id="reset-pomodoro">⏹ Reset</button>
+    </div>
+  </div>
+</div>
+
+<!-- 7: Favoriete websites -->
+<!-- 7: Favoriete websites -->
+<div class="div7 widget" id="links-widget">
+  <div class="widget-header">
+    <h2>Favorieten</h2>
+  </div>
+  <div id="website-links" class="links-row">
+   <a href="https://github.com" target="_blank" class="icon-link">
+  <i class="fab fa-github"></i>
+</a>
+<a href="https://google.com" target="_blank" class="icon-link">
+  <i class="fab fa-google"></i>
+</a>
+<a href="https://youtube.com" target="_blank" class="icon-link">
+  <i class="fab fa-youtube"></i>
+</a>
+  </div>
+</div>
+
+
+
+</div>
+
+
+  <script src="{{ url_for('static', filename='js/github.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/spotify.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/google.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/system.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/fullscreen.js') }}"></script>
+<script src="{{ url_for('static', filename='js/pomodoro.js') }}"></script>
+<script src="{{ url_for('static', filename='js/links.js') }}"></script>
+
+
+
+</body>
+</html>

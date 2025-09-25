@@ -77,7 +77,7 @@ def events():
     now = datetime.now(timezone.utc).isoformat()
 
     params = {
-        "maxResults": 10,
+        "maxResults": 8,
         "orderBy": "startTime",
         "singleEvents": True,
         "timeMin": now

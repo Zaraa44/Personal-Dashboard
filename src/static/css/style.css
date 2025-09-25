@@ -1,454 +1,297 @@
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: #121212;
-    color: #e5e5e7;
-    margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #121212;
+  color: #e5e5e7;
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* voorkomt scrollbars */
 }
 
 h1 {
-    text-align: center;
-    font-weight: 600;
-    padding: 20px 0;
-    color: #ffffff;
+  text-align: center;
+  font-weight: 600;
+  padding: 20px 0;
+  color: #ffffff;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 24px;
-    padding: 24px;
+/* === GRID LAYOUT === */
+.parent {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);   /* 5 kolommen */
+  grid-auto-rows: minmax(150px, auto);     /* rijhoogte past zich aan inhoud aan */
+  gap: 16px;
+  padding: 24px;
 }
 
+/* Posities in grid */
+.div1 { grid-column: span 2; grid-row: span 3; }  /* Google */
+.div2 { grid-column: 1 / span 2; grid-row: 4 / span 2; } /* GitHub */
+.div3 { grid-column: 3; grid-row: 1; } /* Titel */
+.div4 { grid-column: 3; grid-row: 2 / span 2; } /* Pomodoro */
+.div5 { grid-column: 4 / span 2; grid-row: 1 / span 3; } /* Spotify */
+.div6 { grid-column: 3; grid-row: 4 / span 2; }
+.div7 { grid-column: 4 / span 2; grid-row: 4; }
+.div8 { grid-column: 4; grid-row: 5; }
+.div9 { grid-column: 5; grid-row: 5; }
+
+/* Zorg dat widgets niet uitrekken */
 .widget {
-    background: #1e1e1f;
-    border-radius: 18px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+  background: #1e1e1f;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-self: start; /* zet bovenin cel */
+  height: auto;      /* neem hoogte van inhoud */
+  transition: height 0.3s ease, width 0.3s ease;
+
 }
+
+.title-widget {
+  background: #1e1e1f;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-widget h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#fullscreen-icon {
+  font-size: 18px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+#fullscreen-icon:hover {
+  opacity: 1;
+}
+
 
 .widget h2 {
-    margin: 0 0 12px 0;
-    font-size: 18px;
-    font-weight: 600;
-    color: #ffffff;
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .widget h3 {
-    margin-top: 16px;
-    margin-bottom: 8px;
-    font-size: 15px;
-    font-weight: 500;
-    color: #b5b5b7;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #b5b5b7;
 }
 
 .widget-content {
-    flex: 1;
-    overflow-y: auto;
-    max-height: 320px;
-    padding-right: 8px;
-    scrollbar-width: none;
+  flex: 1;
+  overflow-y: auto;
+  max-height: 320px;
+  padding-right: 8px;
+  scrollbar-width: none;
 }
-
-.widget-content::-webkit-scrollbar {
-    display: none;
-}
+.widget-content::-webkit-scrollbar { display: none; }
 
 .widget-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
 }
 
 .widget-icon {
-    width: 22px;
-    height: 22px;
-    filter: invert(100%);
-    transition: opacity 0.2s;
+  width: 22px;
+  height: 22px;
+  filter: invert(100%);
+  transition: opacity 0.2s;
 }
 
-#github-widget {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 615px;
-    height: 320px;
-    margin-left: 2rem;
-    margin-bottom: 1rem;
-}
-
-#github-widget h3 {
-  margin-left: 20px;
-}
-
-#repo-info{
-    margin-left: 20px;
-}
+/* === GITHUB WIDGET === */
+#github-widget h3 { margin-left: 20px; }
+#github-widget{ height:60%;
+ margin-bottom: 1.5rem;}
+#repo-info { margin-left: 30px; }
 
 select {
-    background: #2b2b2d;
-    color: #f5f5f7;
-    border: none;
-    border-radius: 8px;
-    padding: 6px 10px;
-    font-size: 14px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
-    height: 60px;
-    margin-left: 20px;
-    margin-right: 20px;
+  background: #2b2b2d;
+  color: #f5f5f7;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  height: 40px;
+  margin: 0 20px 10px 20px;
 }
 
 .commit-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 10px;
 }
 
 .commit-item {
-    padding: 10px;
-    border-radius: 10px;
-    background: #2a2a2c;
-    margin-left: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #2a2a2c;
 }
-
-.commit-item:hover {
-    background: #333335;
-}
+.commit-item:hover { background: #333335; }
 
 .commit-message {
-    font-size: 14px;
-    font-weight: 500;
-    color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
 }
-
 .commit-author {
-    font-size: 12px;
-    color: #ea7e6d;
-    margin-top: 2px;
+  font-size: 12px;
+  color: #ea7e6d;
+  margin-top: 2px;
 }
 
 .list a {
-    display: block;
-    padding: 8px 10px;
-    border-radius: 8px;
-    background: #2a2a2c;
-    margin-bottom: 6px;
-    font-size: 14px;
-    color: #ea7e6d;
-    transition: background 0.2s;
+  display: block;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #2a2a2c;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #ea7e6d;
+  transition: background 0.2s;
 }
-.list a:hover {
-    background: #333335;
-}
+.list a:hover { background: #333335; }
 
 /* === SPOTIFY WIDGET === */
-#spotify-widget {
-    background: #1e1e1f;
-    border-radius: 18px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 600px;
-    height: 480px;
-    margin-right: 2rem;
-    margin-top: 1rem;
-}
-
 #spotify-widget .cover {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
 }
-
 #spotify-widget .cover img {
-    width: 260px;
-    height: 260px;
-    object-fit: cover;
-    border-radius: 14px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    margin-top: 10px;
-
+  width: 230px;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  margin-top: 10px;
 }
-
 #spotify-widget .track-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #ffffff;
-    margin-bottom: 4px;
-    margin-top: 20px;
-    margin-left: 170px;
-}
-
-#spotify-widget .artist-name {
-    font-size: 14px;
-    color: #b5b5b7;
-    margin-bottom: 12px;
-    margin-left: 170px;
-}
-
-#spotify-widget .controls {
-    margin-top: 14px;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-#spotify-widget .controls button {
-    background: #2a2a2c;
-    border: none;
-    color: #ffffff;
-    font-size: 18px;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    margin-top: 20px;
-    margin-bottom: 20px
-}
-
-#spotify-widget .controls button:hover {
-    background: #ea7e6d; /* Spotify green */
-    transform: scale(1.08);
-}
-
-#spotify-login {
-    display: none;
-    text-align: center;
-}
-
-#spotify-login button {
-    padding: 8px 14px;
-    border: none;
-    border-radius: 8px;
-    background: #ea7e6d;
-    color: white;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.2s, transform 0.1s;
-}
-
-#spotify-login button:hover {
-    background: #ea7e6d;
-    transform: scale(1.05);
-}
-
-/* === GOOGLE CALENDAR WIDGET (grid style) === */
-#google-widget {
-    background: #1e1e1f;
-    border-radius: 18px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    width: 600px;
-    height: 480px;
-    margin-left: 2rem;
-    margin-top: 1rem;
-}
-
-#google-widget .agenda-cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, 1fr); /* precies 5 rijen */
-    gap: 12px;
-    margin-top: 10px;
-    height: 100%;  /* vult de widget */
-}
-
-
-#google-widget .event-card {
-    background: #2a2a2c;
-    border-radius: 12px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    transition: transform 0.15s, background 0.2s;
-}
-
-#google-widget .event-card:hover {
-    background: #333335;
-    transform: translateY(-2px);
-}
-
-#google-widget .event-date {
-    font-size: 12px;
-    font-weight: 600;
-    color: #ea7e6d; /* groen accent */
-    margin-bottom: 6px;
-}
-
-#google-widget .event-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 4px;
-}
-
-#google-widget .event-time {
-    font-size: 12px;
-    color: #b5b5b7;
-}
-
-/* === SYSTEM WIDGET === */
-#system-widget {
-    width: 470px;
-    height: 315px;
-    margin-top: 20px;
-}
-
-.stat {
-    margin-bottom: 20px;
-}
-
-.label {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 6px;
-    color: #b5b5b7;
-}
-
-.progress {
-    background: #2a2a2c;
-    border-radius: 10px;
-    height: 12px;
-    overflow: hidden;
-    position: relative;
-}
-
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    border-radius: 10px;
-    background: linear-gradient(90deg, #673932, #ea7e6d);
-    transition: width 0.4s ease;
-}
-
-.value {
-    margin-top: 4px;
-    font-size: 13px;
-    color: #e5e5e7;
-    text-align: right;
-}
-
-/* Container onderaan */
-#bottom-widgets {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    display: flex;
-    gap: 20px; /* ruimte tussen widgets */
-}
-
-/* Zorg dat ze dezelfde breedte hebben */
-#bottom-widgets .widget {
-    width: 380px;
-    height: 250px;
-}
-
-.parent {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 8px;
-    height: 100vh; /* optioneel: grid vult hele scherm */
-}
-.parent > div {
-    background: #1e1e1f;
-    border-radius: 12px;
-    padding: 12px;
-}
-
-.div3{
-    margin-top: 40px;
-}
-
-.dashboard-button {
-  cursor: pointer;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
   color: #ffffff;
-  transition: color 0.2s, transform 0.2s;
+    margin-left: 150px;
 }
-
-.dashboard-button:hover {
-  color: #ea7e6d; /* accentkleur */
+#spotify-widget .artist-name {
+  font-size: 14px;
+  color: #b5b5b7;
+  margin-bottom: 20px;
+    margin-left: 150px;
+}
+#spotify-widget .controls {
+  margin: 14px 0 15px 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+#spotify-widget .controls button {
+  background: #2a2a2c;
+  border: none;
+  color: #ffffff;
+  font-size: 18px;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+#spotify-widget .controls button:hover {
+  background: #ea7e6d;
+  transform: scale(1.08);
+}
+#spotify-login { text-align: center; }
+#spotify-login button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #ea7e6d;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.1s;
+}
+#spotify-login button:hover {
+  background: #ea7e6d;
   transform: scale(1.05);
 }
 
-/* Standaard hoogte widgets */
-.widget {
-  transition: height 0.3s ease, width 0.3s ease;
+/* === GOOGLE CALENDAR WIDGET === */
+#google-widget .agenda-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 10px;
 }
-
-/* In fullscreen-modus */
-body.fullscreen-mode .widget {
-  height: 600px;   /* maak groter */
-  max-height: none;
+#google-widget .event-card {
+  background: #2a2a2c;
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: transform 0.15s, background 0.2s;
 }
-
-/* Specifiek voor Spotify */
-body.fullscreen-mode #spotify-widget {
-  height: 550px;
+#google-widget .event-card:hover {
+  background: #333335;
+  transform: translateY(-2px);
 }
-
-/* Specifiek voor Google Agenda */
-body.fullscreen-mode #google-widget {
-  height: 550px;
+#google-widget .event-date {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ea7e6d;
+  margin-bottom: 6px;
 }
-
-
-/* Specifiek voor System Info */
-body.fullscreen-mode #system-widget {
-  height: 370px;
+#google-widget .event-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
 }
-
-/* Specifiek voor System Info */
-body.fullscreen-mode #github-widget {
-  height: 370px;
-}
-
-body.fullscreen-mode #pomodoro-widget {
-  height: 370px;
+#google-widget .event-time {
+  font-size: 12px;
+  color: #b5b5b7;
 }
 
 /* === POMODORO WIDGET === */
-#pomodoro-widget {
-  width: 470px;
-  height: 320px;
-  text-align: center;
-    margin-top: 10px;
-}
-
+#pomodoro-widget { text-align: center; height: 88% }
 #pomodoro-time {
   font-size: 60px;
   font-weight: 700;
   margin: 20px 0;
-  color: #ea7e6d; /* zelfde accentkleur */
+  color: #ea7e6d;
 }
-
 .pomodoro-controls {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 4rem;
 }
-
 .pomodoro-controls button {
   padding: 8px 14px;
   border: none;
@@ -458,78 +301,122 @@ body.fullscreen-mode #pomodoro-widget {
   cursor: pointer;
   font-weight: 600;
   transition: background 0.2s, transform 0.1s;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  margin-left: 10px;
 }
-
 .pomodoro-controls button:hover {
   background: #ea7e6d;
   transform: scale(1.05);
 }
 
-/* === FAVORIETE LINKS WIDGET (met 5 vierkante images) === */
-.links-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 10px;
+#system-widget{
+    height: 60%;
+    margin-bottom: 1.5rem;
 }
-
-.link-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 12px;
+.progress {
+  background: #2a2a2c;
+  border-radius: 10px;
+  height: 16px;
   overflow: hidden;
   position: relative;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.link-img img {
-  width: 100%;
+.progress-bar {
   height: 100%;
-  object-fit: cover;
-  display: block;
+  width: 0%;
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    #ea7e6d,
+    #f3a683
+  );
+  transition: width 0.4s ease;
 }
 
-.link-img:hover {
-  transform: scale(1.08);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+#cpu-bar {
+  background: linear-gradient(90deg, #8a4242, #ff7676); /* rood/oranje */
 }
 
-.link-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 600;
-  text-align: center;
-  padding: 4px 0;
-  opacity: 0;
-  transition: opacity 0.2s;
+#ram-bar {
+  background: linear-gradient(90deg, #9b5449, #ff9a76); /* blauw */
 }
 
-.link-img:hover .link-overlay {
-  opacity: 1;
+#disk-bar {
+  background: linear-gradient(90deg, #a96851, #ffbf76); /* groen/turquoise */
 }
 
+#system-widget .stat {
+  margin-bottom: 20px; /* meer ruimte tussen CPU → RAM → Disk */
+}
+
+#system-widget .stat:last-child {
+  margin-bottom: 0; /* geen extra ruimte onder de laatste */
+}
+
+
+#links-widget .links-row {
+  display: flex;
+  flex-wrap: wrap; /* laat breken als scherm smaller is */
+  gap: 16px;
+  justify-content: space-around;
+  margin-top: 12px;
+}
+
+/* Gradient icon kleur */
+#links-widget .icon-link i {
+  background: linear-gradient(90deg, #ea7e6d, #f3a683); /* donker links → licht rechts */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  font-size: 28px;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+/* Achtergrond vierkantjes blijven donker */
 .icon-link {
-  font-size: 42px;
-  color: white;      /* basis kleur */
-  width: 80px;
-  height: 80px;
+  font-size: 28px;
+  width: 60px;
+  height: 60px;
   border-radius: 12px;
   background: #2a2a2c;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.2s, box-shadow 0.2s, color 0.3s;
-}
-.icon-link:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
-  color: #ea7e6d;    /* hover kleur */
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+      position: relative;
 }
 
+.icon-link::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 100%;
+    margin-bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2a2a2c;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.icon-link:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(4px);
+}
+
+/* Hover effect: laat icoon feller lijken */
+#links-widget .icon-link:hover i {
+  filter: brightness(1.3);
+}
+
+.icon-link:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+}
